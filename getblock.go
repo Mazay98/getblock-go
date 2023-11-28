@@ -6,16 +6,9 @@ import (
 	"github.com/ybbus/jsonrpc/v3"
 )
 
-const authorizationHeaderKey = "x-api-key"
-
 // New creates Client.
-func New(token string, endpoint string) *Client {
-	opts := &jsonrpc.RPCClientOpts{}
-	if token != "" {
-		opts.CustomHeaders = map[string]string{authorizationHeaderKey: token}
-	}
-
-	return &Client{jsonrpc.NewClientWithOpts(endpoint, opts)}
+func New(endpoint string) *Client {
+	return &Client{jsonrpc.NewClient(endpoint)}
 }
 
 // Client is common JSON-RPC client.

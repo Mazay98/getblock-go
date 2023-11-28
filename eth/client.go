@@ -25,12 +25,12 @@ const (
 	Ether = 1e18
 )
 
-// Endpoint is default endpoint for etherium mainnet.
-const Endpoint = "https://eth.getblock.io/mainnet/"
+// Endpoint is default endpoint for getblock.
+const Endpoint = "https://go.getblock.io"
 
 // New creates JSON-RPC client for https://eth.getblock.io/mainnet/.
 func New(token string) *Client {
-	return &Client{getblock.New(token, Endpoint)}
+	return &Client{getblock.New(fmt.Sprintf("%s/%s", Endpoint, token))}
 }
 
 // Client is JSON-RPC client
@@ -91,7 +91,7 @@ func (c *Client) ChainID() {}
 
 // Coinbase returns the client coinbase address. The coinbase address is the account to pay mining rewards to.
 //
-//To set a coinbase address, start Besu with the --miner-coinbase option set to a valid Ethereum account address. You can get the Ethereum account address from a client such as MetaMask or Etherscan.
+// To set a coinbase address, start Besu with the --miner-coinbase option set to a valid Ethereum account address. You can get the Ethereum account address from a client such as MetaMask or Etherscan.
 //
 // https://getblock.io/docs/available-nodes-methods/ETH/JSON-RPC/eth_coinbase
 func (c *Client) Coinbase() {}
@@ -102,7 +102,7 @@ func (c *Client) Coinbase() {}
 //
 // If revert reason is enabled with --revert-reason-enabled, the eth_estimateGas error response will include the revert reason.
 //
-//https://getblock.io/docs/available-nodes-methods/ETH/JSON-RPC/eth_estimateGas
+// https://getblock.io/docs/available-nodes-methods/ETH/JSON-RPC/eth_estimateGas
 func (c *Client) EstimateGas() {}
 
 // GasPrice returns a percentile gas unit price for the most recent blocks, in Wei. By default, the last 100 blocks are examined and the 50th percentile gas unit price (that is, the median value) is returned.
